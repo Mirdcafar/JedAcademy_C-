@@ -94,33 +94,36 @@
 //}
 
 //6=======
-Console.WriteLine("Otagin uzunlugun dahil edin: ");
-if (int.TryParse(Console.ReadLine(), out int uzunlug))
-{
-    Console.WriteLine("Otagin enin dahil edin: ");
-    if (int.TryParse(Console.ReadLine(), out int eni))
-    {
-        Console.WriteLine("Otagin hundurluyun dahil edin: ");
-        if (int.TryParse(Console.ReadLine(), out int hundurluy))
-        {
-            double rest1 = (uzunlug * eni) * 0.2;
-            double rest2 = (uzunlug * eni) - rest1;
-            double boya =  rest2 * 0.5;
-            Console.WriteLine(rest2);
-            Console.WriteLine(boya);
-            Console.WriteLine($"{rest1}");
-        }
-        else
-        {
-            Console.WriteLine("Invalid number !!");
-        }
-    }
-    else
-    {
-        Console.WriteLine("Invalid number !!");
-    }
-}
-else
-{
-    Console.WriteLine("Invalid number !!");
-}
+
+//while (true)
+//{
+//    Console.WriteLine("Otagin uzunlugun dahil edin: ");
+//    if (int.TryParse(Console.ReadLine(), out int uzunlug))
+//    {
+//        Console.WriteLine("Otagin enin dahil edin: ");
+//        if (int.TryParse(Console.ReadLine(), out int eni))
+//        {
+//            Console.WriteLine("Otagin hundurluyun dahil edin: ");
+//            if (int.TryParse(Console.ReadLine(), out int hundurluy))
+//            {
+//                double rest1 = (uzunlug * eni) * 0.2;
+//                double rest2 = (uzunlug * eni) - rest1;
+//                double boya = rest2 * 0.5;
+//                Console.WriteLine("Otagin kvadrati: " + rest2);
+//                Console.WriteLine("Otaga lazim olan boya: " + boya + " ml");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Invalid number !!");
+//            }
+//        }
+//        else
+//        {
+//            Console.WriteLine("Invalid number !!");
+//        }
+//    }
+//    else
+//    {
+//        Console.WriteLine("Invalid number !!");
+//    }
+//}
