@@ -50,22 +50,22 @@
 
 //3==========
 
-using System;
+//using System;
 
-class Program
-{
-    static void Main()
-    {
-        Console.WriteLine("Oyun kartının seriya nömrəsini daxil edin (0-dan 35-ə qədər): ");
-        int seriyaNomresi = Convert.ToInt32(Console.ReadLine());
+//class Program
+//{
+//    static void Main()
+//    {
+//        Console.WriteLine("Oyun kartının seriya nömrəsini daxil edin (0-dan 35-ə qədər): ");
+//        int seriyaNomresi = Convert.ToInt32(Console.ReadLine());
 
-        string kostyum = (seriyaNomresi <= 17) ? "A" : "B";
-        int deyer = (seriyaNomresi <= 17) ? 10 : 20;
+//        string kostyum = (seriyaNomresi <= 17) ? "A" : "B";
+//        int deyer = (seriyaNomresi <= 17) ? 10 : 20;
 
-        Console.WriteLine($"Kartın kostyumu: {kostyum}");
-        Console.WriteLine($"Kartın dəyəri: {deyer}");
-    }
-}
+//        Console.WriteLine($"Kartın kostyumu: {kostyum}");
+//        Console.WriteLine($"Kartın dəyəri: {deyer}");
+//    }
+//}
 
 
 //4============
