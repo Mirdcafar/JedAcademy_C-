@@ -95,8 +95,7 @@
 
 //6=======
 
-//while (true)
-//{
+
 //    Console.WriteLine("Otagin uzunlugun dahil edin: ");
 //    if (int.TryParse(Console.ReadLine(), out int uzunlug))
 //    {
@@ -126,4 +125,3 @@
 //    {
 //        Console.WriteLine("Invalid number !!");
 //    }
-//}

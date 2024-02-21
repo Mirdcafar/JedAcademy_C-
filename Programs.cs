@@ -1,52 +1,70 @@
 ﻿
 //1==========
+//bool choose = true;
 
-//while (true)
+//while (choose)
 //{
-
 //    Console.WriteLine("1-4 geder regem secin");
+//    Console.WriteLine("1 Yeni oyun"); Console.WriteLine("2 Oyun davam edir");
+//    Console.WriteLine("3 Oyun parametirler"); Console.WriteLine("4 Cihis");
 //    string secim = Console.ReadLine();
-
 //    switch (secim)
 //    {
 //        case "1":
 //            Console.WriteLine("1 Yeni oyun");
 //            break;
 //        case "2":
-//            Console.WriteLine("2 Oyun davam edir");
-//            break;
+//            Console.WriteLine("2 Oyun davam edir"); break;
 //        case "3":
 //            Console.WriteLine("3 Oyun parametirler");
 //            break;
 //        case "4":
-//            Console.WriteLine("4 Cihis");
+//            Console.WriteLine("4 Cihis"); choose = false;
 //            break;
 //        default:
-//            Console.WriteLine("Yanlis regem");
-//            break;
+//            Console.WriteLine("Yanlis regem"); break;
 //    }
 //}
+
 
 //2=======
 
-//while (true)
-//{
-//    Console.WriteLine("saati dahil et");
-//    int saat = Int32.Parse(Console.ReadLine());
-//    Console.WriteLine("deyge dahil et");
-//    int deyge = Int32.Parse(Console.ReadLine());
 
-//    if (5 <= saat && saat < 12 && 0 <= deyge && deyge < 60)
-//    {
-//        Console.WriteLine("Seheriniz heyir !!!");
-//    }else if (12 <= saat && saat < 18 && 0 <= deyge && deyge < 60)
-//    {
-//        Console.WriteLine("Ginortaniz heyir !!!");
-//    }else if(18 <= saat && saat < 23 && 0 <= deyge && deyge < 60)
-//    {
-//        Console.WriteLine("Axsaminiz heyir !!!");
-//    }
-//}
+Console.WriteLine("saati dahil et");
+if (Int32.TryParse(Console.ReadLine(), out int saat))
+{
+    Console.WriteLine("deyge dahil et");
+    if (Int32.TryParse(Console.ReadLine(), out int deyge))
+    {
+        if (0 <= saat && saat < 24 && 0 <= deyge && deyge < 60)
+        {
+            if (5 <= saat && saat < 12)
+            {
+                Console.WriteLine("Seheriniz heyir !!!");
+            }
+            else if (12 <= saat && saat < 18)
+            {
+                Console.WriteLine("Ginortaniz heyir !!!");
+            }
+            else if (18 <= saat && saat < 23)
+            {
+                Console.WriteLine("Axsaminiz heyir !!!");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid number !!!");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Invalid number !!!");
+    }
+}
+else
+{
+    Console.WriteLine("Invalid number !!!");
+}
 
 //3==========
 

@@ -97,30 +97,31 @@
 //}
 
 //3=============
-int rows = 5; 
-int cols = 5;
 
-char[,] array = new char[rows, cols];
+//int rows = 5; 
+//int cols = 5;
 
-for (int i = 0; i < rows; i++)
-{
-    for (int j = 0; j < cols; j++)
-    {
-        array[i, j] = '*';
-    }
+//char[,] array = new char[rows, cols];
+
+//for (int i = 0; i < rows; i++)
+//{
+//    for (int j = 0; j < cols; j++)
+//    {
+//        array[i, j] = '*';
+//    }
     
-}
+//}
 
-int centerRow = rows / 2;
-int centerCol = cols / 2;
-array[centerRow, centerCol] = '+';
+//int centerRow = rows / 2;
+//int centerCol = cols / 2;
+//array[centerRow, centerCol] = '+';
 
-for (int i = 0; i < rows; i++)
-{
-    for (int j = 0; j < cols; j++)
-    {
-        Console.Write(array[i, j] + " ");
-    }
-    Console.WriteLine();
-}
+//for (int i = 0; i < rows; i++)
+//{
+//    for (int j = 0; j < cols; j++)
+//    {
+//        Console.Write(array[i, j] + " ");
+//    }
+//    Console.WriteLine();
+//}
 
