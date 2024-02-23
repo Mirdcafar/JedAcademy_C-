@@ -1,4 +1,4 @@
-﻿int balans = 0;
+﻿int balans = 100;
 bool tryi = true;
 
 while (tryi)
@@ -16,30 +16,44 @@ while (tryi)
 
     Console.WriteLine(string.Join("", selectedElements));
 
+    Console.WriteLine($"Balans:{balans}");
+
 
     if (string.Join("" , selectedElements) == "@@@")
     {
         balans += 100;
-        tryi = false;
         Console.WriteLine("Siz udtunuz !!!");
     }
     else if (string.Join("", selectedElements) == "###")
     {
         balans += 1000;
-        tryi = false;
         Console.WriteLine("Siz udtunuz !!!");
     }
     else if (string.Join("", selectedElements) == "$$$")
     {
         balans += 10000;
-        tryi = false;
         Console.WriteLine("Siz udtunuz !!!");
     }
     else
     {
         Console.WriteLine("Siz uduzdunuz !!!");
+        balans -= 100;
+    }
+
+
+    Console.Write("Yenidən oynamaq istəyirsinizmi? (y/n): ");
+    string yanit = Console.ReadLine();
+
+    if (balans == 0)
+    {
         tryi = false;
     }
 
-    Console.WriteLine("Balans: " + balans);
+    if ( yanit != "y")
+    {
+        tryi = false;
+    }
+
+
+    Console.Clear(); 
 }
