@@ -30,41 +30,41 @@
 //2=======
 
 
-Console.WriteLine("saati dahil et");
-if (Int32.TryParse(Console.ReadLine(), out int saat))
-{
-    Console.WriteLine("deyge dahil et");
-    if (Int32.TryParse(Console.ReadLine(), out int deyge))
-    {
-        if (0 <= saat && saat < 24 && 0 <= deyge && deyge < 60)
-        {
-            if (5 <= saat && saat < 12)
-            {
-                Console.WriteLine("Seheriniz heyir !!!");
-            }
-            else if (12 <= saat && saat < 18)
-            {
-                Console.WriteLine("Ginortaniz heyir !!!");
-            }
-            else if (18 <= saat && saat < 23)
-            {
-                Console.WriteLine("Axsaminiz heyir !!!");
-            }
-        }
-        else
-        {
-            Console.WriteLine("Invalid number !!!");
-        }
-    }
-    else
-    {
-        Console.WriteLine("Invalid number !!!");
-    }
-}
-else
-{
-    Console.WriteLine("Invalid number !!!");
-}
+//Console.WriteLine("saati dahil et");
+//if (Int32.TryParse(Console.ReadLine(), out int saat))
+//{
+//    Console.WriteLine("deyge dahil et");
+//    if (Int32.TryParse(Console.ReadLine(), out int deyge))
+//    {
+//        if (0 <= saat && saat < 24 && 0 <= deyge && deyge < 60)
+//        {
+//            if (5 <= saat && saat < 12)
+//            {
+//                Console.WriteLine("Seheriniz heyir !!!");
+//            }
+//            else if (12 <= saat && saat < 18)
+//            {
+//                Console.WriteLine("Ginortaniz heyir !!!");
+//            }
+//            else if (18 <= saat && saat < 23)
+//            {
+//                Console.WriteLine("Axsaminiz heyir !!!");
+//            }
+//        }
+//        else
+//        {
+//            Console.WriteLine("Invalid number !!!");
+//        }
+//    }
+//    else
+//    {
+//        Console.WriteLine("Invalid number !!!");
+//    }
+//}
+//else
+//{
+//    Console.WriteLine("Invalid number !!!");
+//}
 
 //3==========
 

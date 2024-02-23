@@ -48,8 +48,11 @@
 //Console.WriteLine("Original array:");
 //for (int i = 0; i < num.Length; i++)
 //{
-//    Console.WriteLine(num[i]);
+//    Console.Write($"{num[i]}, ");
+
 //}
+
+//Console.WriteLine();
 
 //for (int i = 0; i < num.Length - 1; i++)
 //{
@@ -60,7 +63,7 @@
 //            int temp = num[j];
 //            num[j] = num[j + 1];
 //            num[j + 1] = temp;
-//        }        
+//        }
 
 //    }
 //}
@@ -69,7 +72,7 @@
 
 //for (int i = 0; i < num.Length; i++)
 //{
-//    Console.WriteLine(num[i]);
+//    Console.Write($"{num[i]}, ");
 //}
 
 //2=============
@@ -109,7 +112,7 @@
 //    {
 //        array[i, j] = '*';
 //    }
-    
+
 //}
 
 //int centerRow = rows / 2;
