@@ -1,5 +1,4 @@
-﻿
-namespace ConsoleApp1
+﻿namespace ConsoleApp1.MyLIst
 {
     public class MyList
     {

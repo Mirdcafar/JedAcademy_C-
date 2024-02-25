@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp2
+﻿namespace ConsoleApp1.MyLIst
 {
     public static class Program
     {
@@ -21,7 +21,7 @@
             Console.WriteLine("Silmek istediginiz regemi dahil edin :");
             int removeNum = int.Parse(Console.ReadLine());
             list.Remove(removeNum);
-            
+
 
             Console.WriteLine("Removing element :" + removeNum);
 
@@ -32,7 +32,7 @@
 
             Console.WriteLine();
             List<int> lists = new List<int>();
-            
+
             lists.Add(1);
             lists.Add(2);
             lists.Add(3);
