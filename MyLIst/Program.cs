@@ -1,97 +1,28 @@
 ﻿namespace ConsoleApp1.MyLIst
 {
-    public static class Program
+    class Program
     {
-        public static void Main()
+        static void Main()
         {
+            MyList<int> myList = new MyList<int>();
 
-            List<int> list = new List<int>();
-            list.Add(1);
-            list.Add(2);
-            list.Add(3);
-            list.Add(4);
-            list.Add(5);
-            list.Add(6);
-            Console.WriteLine("Array elements :");
-            for (int i = 0; i < list.Count(); i++)
+            // 5 eleman ekleyelim
+            for (int i = 1; i <= 5; i++)
             {
-                Console.Write($"{list[i]}, ");
-            }
-            Console.WriteLine();
-            Console.WriteLine("Silmek istediginiz regemi dahil edin :");
-            int removeNum = int.Parse(Console.ReadLine());
-            list.Remove(removeNum);
-
-
-            Console.WriteLine("Removing element :" + removeNum);
-
-            foreach (var element in list)
-            {
-                Console.Write($"{element}, ");
+                myList.Add(i);
             }
 
-            Console.WriteLine();
-            List<int> lists = new List<int>();
+            Console.WriteLine("After adding 5 elements:");
+            myList.PrintList();
 
-            lists.Add(1);
-            lists.Add(2);
-            lists.Add(3);
-            lists.Add(4);
-            lists.Add(5);
-            lists.Remove(removeNum);
-            for (int i = 0; i < lists.Count(); i++)
+            // 500 eleman ekleyelim
+            for (int i = 6; i <= 505; i++)
             {
-                Console.Write($"{lists[i]}, ");
+                myList.Add(i);
             }
 
-            Console.WriteLine();
-
-            Console.WriteLine("Array count :");
-
-            Console.WriteLine(list.Count());
-
-            Console.WriteLine("List Any :");
-
-            bool containts = list.Any(x => x == 3);
-
-            Console.WriteLine(containts);
-
-            Console.WriteLine("List Max :");
-
-            Console.WriteLine(list.Max(x => x));
-
-            Console.WriteLine("List Min :");
-
-            Console.WriteLine(list.Min(x => x));
-
-            Console.WriteLine("List Concat :");
-
-            int[] concat = list.Concat(lists).ToArray();
-
-            Console.WriteLine("Concatenated array elements:");
-
-            foreach (var element in concat)
-            {
-                Console.Write($"{element}, ");
-            }
-
-            Console.WriteLine();
-
-            Console.WriteLine("List Average :");
-
-            double average = list.Average();
-
-            Console.WriteLine($"Average : {average}");
-
-            Console.WriteLine("List Reverse :");
-
-            list.Reverse();
-
-            foreach (var item in list)
-            {
-                Console.Write($"{item} ,");
-            }
-
+            Console.WriteLine("After adding 500 more elements:");
+            myList.PrintList();
         }
     }
 }

@@ -1,13 +1,43 @@
 ﻿namespace ConsoleApp1.MyLIst
 {
-    public class MyList
-    {
-        private const int length = 10;
-        int[] arr = new int[length];
+    using System;
 
-        public int[] List(int[] arr)
+    class MyList<T>
+    {
+        private T[] array;
+        private int capacity;
+        private int count;
+
+        public MyList()
         {
-            return arr;
+            capacity = 5; 
+            array = new T[capacity];
+            count = 0;
+        }
+
+        public void Add(T item)
+        {
+            if (count == capacity)
+            {
+                // Kapasiteyi artır
+                capacity *= 2;
+                Array.Resize(ref array, capacity);
+            }
+
+            array[count] = item;
+            count++;
+        }
+
+        public void PrintList()
+        {
+            Console.WriteLine("MyList elements:");
+
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine(array[i]);
+            }
+
+            Console.WriteLine();
         }
     }
 }
