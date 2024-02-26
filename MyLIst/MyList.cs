@@ -19,7 +19,6 @@
         {
             if (count == capacity)
             {
-                // Kapasiteyi artır
                 capacity *= 2;
                 Array.Resize(ref array, capacity);
             }
@@ -38,6 +37,48 @@
             }
 
             Console.WriteLine();
+        }
+
+        public void Remove(T item)
+        {
+            int index = Array.IndexOf(array, item);
+
+            if(index != -1)
+            {
+                for(int i = index; i < count - 1; i++)
+                {
+                    array[i] = array[i + 1];
+                }
+                count--;
+            }
+        }
+
+        public T Min()
+        {
+            T min = array[0];
+            for (int i = 1; i < count; i++)
+            {
+                if (Comparer<T>.Default.Compare(array[i], min) < 0)
+                {
+                    min = array[i];
+                }
+            }
+
+            return min;
+        }
+
+        public T Max()
+        {
+            T max = array[0];
+            for (int i = 1; i < count; i++)
+            {
+                if (Comparer<T>.Default.Compare(array[i], max) > 0)
+                {
+                    max = array[i];
+                }
+            }
+
+            return max;
         }
     }
 }

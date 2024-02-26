@@ -6,23 +6,20 @@
         {
             MyList<int> myList = new MyList<int>();
 
-            // 5 eleman ekleyelim
             for (int i = 1; i <= 5; i++)
             {
                 myList.Add(i);
             }
 
             Console.WriteLine("After adding 5 elements:");
+            myList.PrintList();          
+
+            myList.Remove(3);
+            Console.WriteLine("After removing element 3:");
             myList.PrintList();
 
-            // 500 eleman ekleyelim
-            for (int i = 6; i <= 505; i++)
-            {
-                myList.Add(i);
-            }
-
-            Console.WriteLine("After adding 500 more elements:");
-            myList.PrintList();
+            Console.WriteLine($"Minimum value: {myList.Min()}");
+            Console.WriteLine($"Maximum value: {myList.Max()}");
         }
     }
 }
