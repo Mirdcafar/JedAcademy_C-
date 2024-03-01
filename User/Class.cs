@@ -6,7 +6,7 @@
         {
             public string Name;
             public decimal Balance;
-            public int bilet;
+            public int sebetdekiBiletSayi;
         }
 
         private List<User> Users;
@@ -22,51 +22,36 @@
 
             if (name == "admin" && pin == 123)
             {
-                onlineUser = new User { Name = "admin", Balance = 100 };
+                onlineUser = new User { Name = "admin", Balance = 500 };
                 Console.WriteLine("Super admin olarak giris yaptiniz !!!");
                 islActive = true;
             }
             else
             {
-                onlineUser = new User { Name = name, Balance = 100 };
+                onlineUser = new User { Name = name, Balance = 500 };
                 Console.WriteLine($"{name} adi giris yaptiniz. Balansiniz: {onlineUser.Balance}");
                 islActive = false;
             }
             return islActive;
         }
 
-        public void BiletAlmag()
+        public bool BiletCount()
         {
-            if(onlineUser.Balance != 0)
+            if (onlineUser.sebetdekiBiletSayi > 0)
             {
-                Console.WriteLine("Bilet satin alindi!");
-                onlineUser.Balance -= 100;
-
-                Console.WriteLine("Sebete elave etmek y/n");
-                string sebet = Console.ReadLine();
-
-                if (sebet == "y")
-                {
-                    onlineUser.bilet += 1;
-                    Console.WriteLine($"{onlineUser.bilet} BiletSebete elave edildi");
-                }
+                return true;
             }
-            else
-            {
-                Console.WriteLine("balansinizda kifayet geder balans yoxdur");
-            }
+            return false;
         }
-        public void BiletIade()
+
+
+        public void BiletIade(int price)
         {
-            if(onlineUser.bilet != 0)
+            if (onlineUser.sebetdekiBiletSayi != 0)
             {
                 Console.WriteLine("Bilet iade edildi!");
-                onlineUser.Balance += 100;
-                onlineUser.bilet -= 1;
-            }
-            else
-            {
-                Console.WriteLine("Sizde biletiniz yoxdur !!!");
+                onlineUser.Balance += price;
+                onlineUser.sebetdekiBiletSayi -= 1;
             }
         }
         public void Balance()
@@ -81,5 +66,25 @@
         {
             Console.WriteLine($"Sizin balansiz : {onlineUser.Balance}");
         }
+
+        public void Decrement()
+        {
+
+            if (onlineUser.sebetdekiBiletSayi != 0)
+            {
+                onlineUser.sebetdekiBiletSayi--;
+            }
+        }
+
+        public int BiletAdd(int price)
+        {
+            if (onlineUser.Balance != 0)
+            {
+                onlineUser.sebetdekiBiletSayi++;
+                onlineUser.Balance -= price;
+            }
+            return price;
+        }
+
     }
 }
