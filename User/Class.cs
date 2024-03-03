@@ -35,13 +35,18 @@
             return islActive;
         }
 
-        public bool BiletCount()
+        public bool BiletCountBool()
         {
             if (onlineUser.sebetdekiBiletSayi > 0)
             {
                 return true;
             }
             return false;
+        }
+
+        public void BiletCount()
+        {
+            Console.WriteLine(onlineUser.sebetdekiBiletSayi);
         }
 
 
