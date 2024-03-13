@@ -13,8 +13,9 @@ class Program
         while (cixis)
         {
             Console.WriteLine("1.Yuser Dahil Etmek");
-            Console.WriteLine("2.Yuserlere Bahmag");
-            Console.WriteLine("3.Cixis");
+            Console.WriteLine("2.Masin Nomresini Ahtarmag");
+            Console.WriteLine("3.Yuserlere Bahmag");
+            Console.WriteLine("4.Cixis");
             int num = int.Parse(Console.ReadLine());
 
             switch (num)
@@ -37,15 +38,29 @@ class Program
                     personsList.Add(person);
 
                     break;
-                    
                 case 2:
-                    Console.WriteLine("Person:");
-                    foreach (var p in personsList)
+                    Console.WriteLine("Masinin Nomresini Dahil edin Axtaris Ucun :");
+                    var per = Console.ReadLine().ToUpper();
+                    foreach (var items in personsList)
                     {
-                        Console.WriteLine($"Name: {p.Name}, Car Numbers: {p.CarNumbers}, Fines: Amount: {p.Fines.Amount}, Street: {p.Fines.Street}");
+                        if (per == items.CarNumbers)
+                        {
+                            Console.WriteLine($"Name: {items.Name}, Car Numbers: {items.CarNumbers}, Fines: Amount: {items.Fines.Amount}, Street: {items.Fines.Street}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Bu Masin Nomresi Yohdur !!!");
+                        }
                     }
                     break;
                 case 3:
+                    Console.WriteLine("Person:");
+                    foreach (var item in personsList)
+                    {
+                        Console.WriteLine($"Name: {item.Name}, Car Numbers: {item.CarNumbers}, Fines: Amount: {item.Fines.Amount}, Street: {item.Fines.Street}");
+                    }
+                    break;
+                case 4:
                     cixis = false;
                     break;
                     
