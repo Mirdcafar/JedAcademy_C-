@@ -1,67 +1,120 @@
-﻿//using ConsoleApp1.Dictionary_02;
-//using System;
-//using System.Collections.Generic;
+﻿using ConsoleApp1.Dictionary_02;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 
-//class Program
-//{
-//    static void Main()
-//    {
-//        List<Person> personsList = new List<Person>();
+class Program
+{
+    static void Main()
+    {
+        Dictionary<Person, Dictionary<string, Fines>> personsList = new Dictionary<Person, Dictionary<string, Fines>>();
 
-//        bool cixis = true;
+        Person person = new Person();
 
-//        while (cixis)
-//        {
-//            Console.WriteLine("1.Yuser Dahil Etmek");
-//            Console.WriteLine("2.Masin Nomresini Ahtarmag");
-//            Console.WriteLine("3.Yuserlere Bahmag");
-//            Console.WriteLine("4.Cixis");
-//            int num = int.Parse(Console.ReadLine());
+        bool exit = false;
 
-//            switch (num)
-//            {
-//                case 1:
-//                    Console.WriteLine("Masinin Nomresini dahil edin:");
-//                    string carNumber = Console.ReadLine();
+        while (!exit)
+        {
+            Console.WriteLine("1. Useri eleve etmek ");
+            Console.WriteLine("2. masinin nomresin tapmag");
+            Console.WriteLine("3. Useri liste eleve elemek");
+            Console.WriteLine("4. userleri ve masinin nomresini gormek");
+            Console.WriteLine("5. File leri listen goturmek");
+            Console.WriteLine("6. Cixis");
 
-//                    Console.WriteLine("Adinizi Dahil edin:");
-//                    string name = Console.ReadLine();
+            int num = int.Parse(Console.ReadLine());
 
-//                    Console.WriteLine("Cermenin meblegini dahil edin:");
-//                    int amount = int.Parse(Console.ReadLine());
+            switch (num)
+            {
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine("Adinizi dahil edin:");
+                    string personName = Console.ReadLine();
 
-//                    Console.WriteLine("Cermenin yerini dahil edin:");
-//                    string street = Console.ReadLine();
+                    person.Name = personName;
 
-//                    var person = new Person { CarNumbers = carNumber, Name = name, Fines = new Fines { Amount = amount, Street = street } };
+                    Console.WriteLine("masinin nomresini dahil edin:");
+                    string carNumber = Console.ReadLine();
 
-//                    personsList.Add(person);
+                    Console.WriteLine("Cermenin meblegini dahil edin:");
+                    int fineAmount = int.Parse(Console.ReadLine());
 
-//                    break;
-//                case 2:
-//                    Console.WriteLine("Masinin Nomresini Dahil edin Axtaris Ucun :");
-//                    var per = Console.ReadLine().ToUpper();
-//                    foreach (var items in personsList)
-//                    {
-//                        if (per == items.CarNumbers)
-//                        {
-//                            Console.WriteLine($"Name: {items.Name}, Car Numbers: {items.CarNumbers}, Fines: Amount: {items.Fines.Amount}, Street: {items.Fines.Street}");
-//                        }
-                        
-//                    }
-//                    break;
-//                case 3:
-//                    Console.WriteLine("Person:");
-//                    foreach (var item in personsList)
-//                    {
-//                        Console.WriteLine($"Name: {item.Name}, Car Numbers: {item.CarNumbers}, Fines: Amount: {item.Fines.Amount}, Street: {item.Fines.Street}");
-//                    }
-//                    break;
-//                case 4:
-//                    cixis = false;
-//                    break;
-                    
-//            }
-//        }
-//    }
-//}
+                    Console.WriteLine("Hadise olan yeri dahil edin :");
+                    string street = Console.ReadLine();
+
+                    Fines fines = new Fines();
+                    fines.Amount = fineAmount;
+                    fines.Street = street;
+
+                    if (!personsList.ContainsKey(person))
+                    {
+
+                        Dictionary<string, Fines> finesDictionary = new Dictionary<string, Fines>();
+                        finesDictionary.Add(carNumber, fines);
+                        personsList.Add(person, finesDictionary);
+                        Console.WriteLine("User add olundu liste !!!");
+                    }
+                    else
+                    {
+                        personsList[person].Add(carNumber, fines);
+                        Console.WriteLine("Userin adi lisste olduguna gore adina yeni nomre dahil oldu !!!");
+                    }
+
+                    break;
+
+                case 2:
+                    Console.Clear();
+                    Console.WriteLine("Enter the car number for search:");
+                    string searchCarNumber = Console.ReadLine().ToUpper();
+
+                    foreach (var entry in personsList)
+                    {
+                        foreach (var item in entry.Value)
+                        {
+                            if (item.Key == searchCarNumber)
+                            {
+                                Console.WriteLine($"Person: {entry.Key.Name}, Car Number: {item.Key}, Fine Amount: {item.Value.Amount}, Street: {item.Value.Street}");
+                            }
+                        }
+                    }
+                    break;
+                case 3:
+                    var serializedData = personsList.Select(entry => new
+                    {
+                        Person = entry.Key,
+                        Fines = entry.Value
+                    });
+
+                    var json = JsonSerializer.Serialize(serializedData);
+
+                    File.WriteAllText("json.txt", json);
+                    Console.WriteLine("Data serialized and saved to json.txt");
+                    break;
+
+                case 4:
+                    foreach (var entry in personsList)
+                    {
+                        Console.WriteLine($"Person: {entry.Key.Name}");
+                        foreach (var item in entry.Value)
+                        {
+                            Console.WriteLine($"Car Number: {item.Key}, Fine Amount: {item.Value.Amount}, Street: {item.Value.Street}");
+                        }
+                    }
+                    break;
+
+                case 5:
+                    var fileContent = File.ReadAllText("json.txt");
+                    personsList = JsonSerializer.Deserialize<Dictionary<Person, Dictionary<string, Fines>>>(fileContent);
+
+                    break;
+                case 6:
+                    exit = true;
+                    break;
+                default:
+                    Console.WriteLine("Menuda olan regemleri dahil edin\r\n");
+                    break;
+            }
+        }
+    }
+}
