@@ -25,18 +25,53 @@ class Program
             switch (num)
             {
                 case 1:
+                    Console.Clear();
+                    Person person = new Person();
+                    Console.WriteLine("Adinizi dahil edin:");
+                    string personName = Console.ReadLine();
 
-                    PersonManager.AddFile();
+                    person.Name = personName;
+
+                    Console.WriteLine("masinin nomresini dahil edin:");
+                    string carNumber = Console.ReadLine();
+
+                    Console.WriteLine("Cermenin meblegini dahil edin:");
+                    int fineAmount = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Hadise olan yeri dahil edin :");
+                    string street = Console.ReadLine();
+
+                    PersonManager.AddFile(personName , carNumber , fineAmount , street , person);
                     break;
                 case 2:
-                    PersonManager.FindCarNumber();
+                    Console.Clear();
+                    Console.WriteLine("Enter the car number for search:");
+                    string searchCarNumber = Console.ReadLine().ToUpper();
+
+                    foreach (var entry in personsList)
+                    {
+                        foreach (var item in entry.Value)
+                        {
+                            if (item.Key == searchCarNumber)
+                            {
+                                Console.WriteLine($"Person: {entry.Key.Name}, Car Number: {item.Key}, Fine Amount: {item.Value.Amount}, Street: {item.Value.Street}");
+                            }
+                        }
+                    }
                     break;
                 case 3:
                     PersonManager.UserAddList();
                     break;
 
                 case 4:
-                    PersonManager.VievUser();
+                    foreach (var entry in Program.personsList)
+                    {
+                        Console.WriteLine($"Person: {entry.Key.Name}");
+                        foreach (var item in entry.Value)
+                        {
+                            Console.WriteLine($"Car Number: {item.Key}, Fine Amount: {item.Value.Amount}, Street: {item.Value.Street}");
+                        }
+                    }
                     break;
 
                 case 5:
