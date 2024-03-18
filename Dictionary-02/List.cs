@@ -1,16 +1,13 @@
-﻿using ConsoleApp1.Dictionary_02;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿
 using System.Text.Json;
 
 class Program
 {
+    public static Dictionary<Person, Dictionary<string, Fines>> personsList = new Dictionary<Person, Dictionary<string, Fines>>();
+
     static void Main()
     {
-        Dictionary<Person, Dictionary<string, Fines>> personsList = new Dictionary<Person, Dictionary<string, Fines>>();
 
-        Person person = new Person();
 
         bool exit = false;
 
@@ -28,85 +25,22 @@ class Program
             switch (num)
             {
                 case 1:
-                    Console.Clear();
-                    Console.WriteLine("Adinizi dahil edin:");
-                    string personName = Console.ReadLine();
 
-                    person.Name = personName;
-
-                    Console.WriteLine("masinin nomresini dahil edin:");
-                    string carNumber = Console.ReadLine();
-
-                    Console.WriteLine("Cermenin meblegini dahil edin:");
-                    int fineAmount = int.Parse(Console.ReadLine());
-
-                    Console.WriteLine("Hadise olan yeri dahil edin :");
-                    string street = Console.ReadLine();
-
-                    Fines fines = new Fines();
-                    fines.Amount = fineAmount;
-                    fines.Street = street;
-
-                    if (!personsList.ContainsKey(person))
-                    {
-
-                        Dictionary<string, Fines> finesDictionary = new Dictionary<string, Fines>();
-                        finesDictionary.Add(carNumber, fines);
-                        personsList.Add(person, finesDictionary);
-                        Console.WriteLine("User add olundu liste !!!");
-                    }
-                    else
-                    {
-                        personsList[person].Add(carNumber, fines);
-                        Console.WriteLine("Userin adi lisste olduguna gore adina yeni nomre dahil oldu !!!");
-                    }
-
+                    PersonManager.AddFile();
                     break;
-
                 case 2:
-                    Console.Clear();
-                    Console.WriteLine("Enter the car number for search:");
-                    string searchCarNumber = Console.ReadLine().ToUpper();
-
-                    foreach (var entry in personsList)
-                    {
-                        foreach (var item in entry.Value)
-                        {
-                            if (item.Key == searchCarNumber)
-                            {
-                                Console.WriteLine($"Person: {entry.Key.Name}, Car Number: {item.Key}, Fine Amount: {item.Value.Amount}, Street: {item.Value.Street}");
-                            }
-                        }
-                    }
+                    PersonManager.FindCarNumber();
                     break;
                 case 3:
-                    var serializedData = personsList.Select(entry => new
-                    {
-                        Person = entry.Key,
-                        Fines = entry.Value
-                    });
-
-                    var json = JsonSerializer.Serialize(serializedData);
-
-                    File.WriteAllText("json.txt", json);
-                    Console.WriteLine("Data serialized and saved to json.txt");
+                    PersonManager.UserAddList();
                     break;
 
                 case 4:
-                    foreach (var entry in personsList)
-                    {
-                        Console.WriteLine($"Person: {entry.Key.Name}");
-                        foreach (var item in entry.Value)
-                        {
-                            Console.WriteLine($"Car Number: {item.Key}, Fine Amount: {item.Value.Amount}, Street: {item.Value.Street}");
-                        }
-                    }
+                    PersonManager.VievUser();
                     break;
 
                 case 5:
-                    var fileContent = File.ReadAllText("json.txt");
-                    personsList = JsonSerializer.Deserialize<Dictionary<Person, Dictionary<string, Fines>>>(fileContent);
-
+                    PersonManager.VievFile();
                     break;
                 case 6:
                     exit = true;
