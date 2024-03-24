@@ -1,1 +1,1 @@
-[{"Person":{"Name":"Mir"},"Fines":{"jdjd":{"Amount":3,"Street":"jdjd"}}},{"Person":{"Name":"User"},"Fines":{"jjjj":{"Amount":123,"Street":"dwefw"},"jdjd":{"Amount":123,"Street":"kfjf"}}}]
+{"Drinks":{"Drinks":{"Name":"ferfer","Price":23},"Pizza":{"Name":null,"Price":0},"Desserts":{"Name":null,"Price":0},"Salad":{"Name":null,"Price":0},"ProductCount":1},"Pizza":{"Drinks":{"Name":null,"Price":0},"Pizza":{"Name":"wfrefe","Price":34},"Desserts":{"Name":null,"Price":0},"Salad":{"Name":null,"Price":0},"ProductCount":1}}
