@@ -9,50 +9,19 @@ using System.Xml.Linq;
 
 namespace ConsoleApp1.Shop;
 
-public class SerializedPersonProduct
-{
-    public Person Person { get; set; }
-    public Product Product { get; set; }
-}
-public class Person
-{
-    public string Name { get; set; }
-    public int Password { get; set; }
-}
-
 public class Product
 {
-    public Drinks Drinks { get; set; } = new Drinks();
-    public Pizza Pizza { get; set; } = new Pizza();
-    public Desserts Desserts { get; set; } = new Desserts();
-    public Salad Salad { get; set; } = new Salad();
-
-    public int ProductCount { get; set; }
+   public string Description { get; set; }
+    public int Price { get; set; }
+    public Category Category { get; set; }
 }
 
-public class Drinks
+public enum Category
 {
-    public string Name { get; set; }
-    public int Price { get; set; }
-}
-
-public class Pizza
-{
-    public string Name { get; set; }
-    public int Price { get; set; }
-
-}
-
-public class Desserts
-{
-    public string Name { get; set; }
-    public int Price { get; set; }
-}
-
-public class Salad
-{
-    public string Name { get; set; }
-    public int Price { get; set; }
+    Drink,
+    Pizza,
+    Dessert,
+    Salad
 }
 
 class Class1
@@ -63,93 +32,69 @@ class Class1
         {
             return true;
         }
-        else
-        {
+        return false;
+    }
 
-            return false;
+    public static void SaveProductsToFile()
+    {
+        string json = JsonSerializer.Serialize(FileName.productList);
+        File.WriteAllText("products.txt", json);
+    }
+
+    public static void ReadProductsFromFile()
+    {
+        string filePath = "products.txt";
+        string directory = Path.GetDirectoryName(filePath);
+        if (!Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
         }
+        string json = JsonSerializer.Serialize(FileName.productList);
+        File.WriteAllText(filePath, json);
     }
 
-
-    public static void AddProduct(string name, Product product)
+    public static void SavePersonProductsToFile()
     {
-        Product existingPerson = FileName.productList.FirstOrDefault(p => p.Key == name).Value;
-
-
-        if (existingPerson == null)
+        var serializedData = Enumerable.Select(FileName.listPerson, (KeyValuePair<string, Dictionary<string, Product>> entry) => new
         {
-            FileName.productList.Add(name, product);
-        }
-        else
-        {
-            FileName.productList[name] = product;
-        }
-    }
-
-    public static void AddToFile()
-    {
-        var json = JsonSerializer.Serialize(FileName.productList);
-
-        File.WriteAllText("json.txt", json);
-    }
-
-    public static void ReadFile()
-    {
-        string jsonString = File.ReadAllText("json.txt");
-        FileName.productList = JsonSerializer.Deserialize<Dictionary<string, Product>>(jsonString);
-    }
-
-    public static void AddToFile3()
-    {
-        var serializedData = FileName.listPerson.Select(entry => new
-        {
-            Person = entry.Key,
+            PersonName = entry.Key,
             Products = entry.Value
         });
-
-        var json = JsonSerializer.Serialize(serializedData);
-
-        File.WriteAllText("file.txt", json);
-
+        string json = JsonSerializer.Serialize(serializedData);
+        File.WriteAllText("person_products.txt", json);
     }
 
-    public static void ReadFile3()
+    public static void ReadPersonProductsFromFile()
     {
-
-        string jsonString = File.ReadAllText("file.txt");
-        var list = JsonSerializer.Deserialize<Dictionary<Person, Dictionary<string, Product>>>(jsonString);
-
-        foreach (var kvp in list)
-        {
-            foreach (var productKvp in kvp.Value)
-            {
-                if (!FileName.listPerson.ContainsKey(kvp.Key))
-                {
-                    FileName.listPerson[kvp.Key] = new Dictionary<string, Product>();
-                }
-                FileName.listPerson[kvp.Key].Add(productKvp.Key, productKvp.Value);
-            }
-        }
+        string jsonString = File.ReadAllText("person_products.txt");
+        FileName.listPerson = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, Product>>>(jsonString);
     }
 
-    public static void AddProductToPerson(string personName, Person person, string category, Product product)
+    public static void AddProduct(string productName, Product product)
     {
-        
-
-        if (!FileName.listPerson.ContainsKey(person))
+        if (FileName.productList.ContainsKey(productName))
         {
-            FileName.listPerson[person] = new Dictionary<string, Product>();
-        }
-
-        if (FileName.listPerson[person].ContainsKey(category))
-        {
-            Console.WriteLine($"{personName} already has a product in category {category}.");
+            FileName.productList[productName] = product;
         }
         else
         {
-            FileName.listPerson[person][category] = product;
-            Console.WriteLine($"Product added successfully for {personName} in category {category}.");
+            FileName.productList.Add(productName, product);
         }
+    }
+
+    public static void AddProductToPerson(string personName, string category, Product product)
+    {
+        if (!FileName.listPerson.ContainsKey(personName))
+        {
+            FileName.listPerson[personName] = new Dictionary<string, Product>();
+        }
+        if (FileName.listPerson[personName].ContainsKey(category))
+        {
+            Console.WriteLine(personName + " already has a product in category " + category + ".");
+            return;
+        }
+        FileName.listPerson[personName][category] = product;
+        Console.WriteLine($"Product added successfully for {personName} in category {category}.");
     }
 
 }

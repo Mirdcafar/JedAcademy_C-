@@ -5,12 +5,11 @@ using ConsoleApp1.Shop;
 
 internal class FileName
 {
-    public static Dictionary<Person, Dictionary<string, Product>> listPerson = new Dictionary<Person, Dictionary<string, Product>>();
-    public static Dictionary<string , Product> productList = new Dictionary<string , Product>();
+    public static Dictionary<string, Dictionary<string, Product>> listPerson = new Dictionary<string, Dictionary<string, Product>>();
+    public static List<Product> productList = new List<Product>();
 
     static void Main()
     {
-        Person person = new Person();
 
         Product product = new Product();
         Console.WriteLine("Adinizi dahil edin:");
@@ -19,10 +18,8 @@ internal class FileName
         Console.WriteLine("Sifreni dahil edin:");
         int personPass = int.Parse(Console.ReadLine());
 
-        person.Name = personName;
-        person.Password = personPass;
 
-        bool authenticated = Class1.Users(personName , personPass );
+        bool authenticated = Class1.Users(personName, personPass);
 
         if (authenticated)
         {
@@ -52,101 +49,82 @@ internal class FileName
                         {
 
                             case 1:
-                                Console.WriteLine("Ickini eleve etmek:");
-                                string drinks = Console.ReadLine();
-                                Console.WriteLine("Ickinik nin giymetini dahil edin:");
-                                int drinksPrice = int.Parse(Console.ReadLine());
-
-                                Product productDrinks = new Product();
-
-                                productDrinks.Drinks.Name = drinks;
-                                productDrinks.Drinks.Price = drinksPrice;
-                                productDrinks.ProductCount++;
-
-                                Class1.AddProduct("Drinks", productDrinks);
+                                Console.WriteLine("İçki əlavə etmək:");
+                                string drinkName = Console.ReadLine();
+                                Console.WriteLine("İçki qiymətini daxil edin:");
+                                int drinkPrice = int.Parse(Console.ReadLine());
+                                Product productDrink = new Product();
+                                productDrink.Category = Category.Drink;
+                                productDrink.Description = drinkName;
+                                productDrink.Price = drinkPrice;
+                                Class1.AddProduct(productDrink , Category.Drink);
                                 break;
+
                             case 2:
-                                Console.WriteLine("Pizzani eleve etmek:");
-                                string pizzas = Console.ReadLine();
-                                Console.WriteLine("Pizza nin giymetini dahil edin:");
+                                Console.WriteLine("Pizza əlavə etmək:");
+                                string pizzaName = Console.ReadLine();
+                                Console.WriteLine("Pizza qiymətini daxil edin:");
                                 int pizzaPrice = int.Parse(Console.ReadLine());
 
                                 Product productPizza = new Product();
-
-                                productPizza.Pizza.Name = pizzas;
-                                productPizza.Pizza.Price = pizzaPrice;
-                                productPizza.ProductCount++;
-
-                                Class1.AddProduct("Pizza", productPizza);
+                                productPizza.Category = Category.Pizza;
+                                productPizza.Description = pizzaName;
+                                productPizza.Price = pizzaPrice;
+                                Class1.AddProduct(productPizza , Category.Pizza);
                                 break;
+
                             case 3:
-                                Console.WriteLine("Deserti eleve etmek:");
-                                string desserts = Console.ReadLine();
-                                Console.WriteLine("Desert in giymetini dahil edin:");
-                                int dessertPrice = int.Parse(Console.ReadLine());
+                                Console.WriteLine("Desert əlavə etmək:");
+                                string desertName = Console.ReadLine();
+                                Console.WriteLine("Desertin qiymətini daxil edin:");
+                                int desertPrice = int.Parse(Console.ReadLine());
 
-                                Product productDessert = new Product();
-
-                                productDessert.Desserts.Name = desserts;
-                                productDessert.Desserts.Price = dessertPrice;
-                                productDessert.ProductCount++;
-
-                                Class1.AddProduct("Dessert", productDessert);
+                                Product productDesert = new Product();
+                                productDesert.Category = Category.Dessert;
+                                productDesert.Description = desertName;
+                                productDesert.Price = desertPrice;
+                                Class1.AddProduct(productDesert , Category.Dessert);
                                 break;
+
                             case 4:
-                                Console.WriteLine("Salat eleve etmek:");
-                                string salads = Console.ReadLine();
-                                Console.WriteLine("Salat in giymetini dahil edin:");
+                                Console.WriteLine("Salat əlavə etmək:");
+                                string saladName = Console.ReadLine();
+                                Console.WriteLine("Salatın qiymətini daxil edin:");
                                 int saladPrice = int.Parse(Console.ReadLine());
 
                                 Product productSalad = new Product();
+                                productSalad.Category = Category.Salad;
+                                productSalad.Description = saladName;
+                                productSalad.Price = saladPrice;
+                                Class1.AddProduct(productSalad , Category.Salad);
+                                break;
 
-                                productSalad.Salad.Name = salads;
-                                productSalad.Salad.Price = saladPrice;
-                                productSalad.ProductCount++;
-
-                                Class1.AddProduct("Salad", productSalad);
+                            default:
+                                Console.WriteLine("Düzgün seçim edilmədi!");
                                 break;
                         }
                         break;
                     case 2:
 
-                        foreach (var item in productList)
+                        foreach (var products in productList)
                         {
-                            Console.WriteLine($"Ürün Adı: {item.Key}");
-                            if (item.Value.Drinks.Name != null)
-                            {
-                                Console.WriteLine($"İçecek: {item.Value.Drinks.Name}");
-                            }
-                            if (item.Value.Pizza.Name != null)
-                            {
-                                Console.WriteLine($"Pizza: {item.Value.Pizza.Name}");
-                            }
-                            if (item.Value.Desserts.Name != null)
-                            {
-                                Console.WriteLine($"Desert: {item.Value.Desserts.Name}");
-                            }
-                            if (item.Value.Salad.Name != null)
-                            {
-                                Console.WriteLine($"Salata: {item.Value.Salad.Name}");
-                            }
+                            Console.WriteLine($"{products.Category}: {products.Description} , Price:{product.Price}");
                         }
                         break;
                     case 3:
-                        Class1.AddToFile();
+                        Class1.SaveProductsToFile();
                         break;
                     case 4:
-                        Class1.ReadFile();
+                        Class1.ReadProductsFromFile();
                         break;
                     case 5:
-                        Class1.ReadFile3();
-
-                        foreach (var item in listPerson)
+                        Class1.ReadPersonProductsFromFile();
+                        foreach (var person in listPerson)
                         {
-                            Console.WriteLine($"Name:{item.Key.Name}");
-                            foreach (var item1 in item.Value)
+                            Console.WriteLine($"Name: {person.Key}");
+                            foreach (var products in person.Value)
                             {
-                                Console.WriteLine($"{item1.Key}:{item1.Value.Pizza.Name}");
+                                Console.WriteLine($"{products.Key}: {products.Value.Category} - {products.Value.Description}");
                             }
                         }
                         break;
@@ -168,80 +146,93 @@ internal class FileName
                 Console.WriteLine("4.Liste olan mehsulara bahmag");
 
                 int nums = int.Parse(Console.ReadLine());
-                Class1.ReadFile();
+
                 switch (nums)
                 {
                     case 1:
-                        Console.WriteLine("1.Icki eleve etmek");
-                        Console.WriteLine("2.Pizza eleve etmek");
-                        Console.WriteLine("3.Desert eleve etmek");
-                        Console.WriteLine("4.Salat eleve etmek");
+                        foreach (var products in productList)
+                        {
+                            Console.WriteLine($"{products.Category}: {products.Description} , Price:{product.Price}");
+                        }
+
+                        Console.WriteLine("1. İçki almaq");
+                        Console.WriteLine("2. Pizza almaq");
+                        Console.WriteLine("3. Desert almaq");
+                        Console.WriteLine("4. Salat almaq");
 
                         int num = int.Parse(Console.ReadLine());
 
                         switch (num)
                         {
                             case 1:
-                                Console.WriteLine("Ickini Almag:");
+                                Console.WriteLine("Ickini almaq:");
 
-                                foreach (var item in productList)
+                                foreach (var products in productList)
                                 {
-                                    Class1.AddProductToPerson(item.Key, person,"Drinks", item.Value);
+                                    Class1.AddProductToPerson(products.Category, "Drinks" products.Description, products.Price);
                                 }
                                 break;
                             case 2:
-                                Console.WriteLine("Pizzani eleve etmek:");
+                                Console.WriteLine("Pizzani almaq:");
 
-                                foreach (var item in productList)
+                                foreach (var products in productList)
                                 {
-                                    Class1.AddProductToPerson(item.Key,person, "Pizza", item.Value);
+                                    Class1.AddProductToPerson(products.Category, "Pizza", products.Description, products.Price);
                                 }
-
                                 break;
                             case 3:
-                                Console.WriteLine("Deserti eleve etmek:");
-                                foreach (var item in productList)
+                                Console.WriteLine("Deserti almaq:");
+
+                                foreach (var products in productList)
                                 {
-                                    Class1.AddProductToPerson(item.Key, person, "Desserts", item.Value);
+                                    Class1.AddProductToPerson(products.Category, "Desserts", products.Description, products.Price);
                                 }
                                 break;
                             case 4:
-                                Console.WriteLine("Salat eleve etmek:");
-                                foreach (var item in productList)
+                                Console.WriteLine("Salat almaq:");
+
+                                foreach (var products in productList)
                                 {
-                                    Class1.AddProductToPerson(item.Key, person,"Salad", item.Value);
+                                    Class1.AddProductToPerson(products.Category, "Salad", products.Description, products.Price);
                                 }
                                 break;
+
                         }
                         break;
                     case 2:
-                        Class1.AddToFile3();
-                        break; 
+                        Class1.SavePersonProductsToFile();
+                        break;
                     case 3:
-                        Class1.ReadFile3();
+                        Class1.ReadPersonProductsFromFile();
                         break;
                     case 4:
-                        foreach (var item in productList)
+
+
+                        foreach (var person in FileName.listPerson)
                         {
-                            Console.WriteLine($"Ürün Adı: {item.Key}");
-                            if (item.Value.Drinks.Name != null)
+                            Console.WriteLine($"Adı:{person.Key}");
+                            foreach (var products in person.Value)
                             {
-                                Console.WriteLine($"İçecek: {item.Value.Drinks.Name}");
-                            }
-                            if (item.Value.Pizza.Name != null)
-                            {
-                                Console.WriteLine($"Pizza: {item.Value.Pizza.Name}");
-                            }
-                            if (item.Value.Desserts.Name != null)
-                            {
-                                Console.WriteLine($"Desert: {item.Value.Desserts.Name}");
-                            }
-                            if (item.Value.Salad.Name != null)
-                            {
-                                Console.WriteLine($"Salata: {item.Value.Salad.Name}");
+                                if (products.Value.Drink != null)
+                                {
+                                    Console.WriteLine($"{products.Key}: {products.Value.Drink}");
+                                }
+                                if (products.Value.Pizza != null)
+                                {
+                                    Console.WriteLine($"{products.Key}: {products.Value.Pizza}");
+                                }
+                                if (products.Value.Dessert != null)
+                                {
+                                    Console.WriteLine($"{products.Key}: {products.Value.Dessert}");
+                                }
+                                if (products.Value.Salad != null)
+                                {
+                                    Console.WriteLine($"{products.Key}: {products.Value.Salad}");
+                                }
+                                Console.WriteLine($"Ümumi Qiymət:{products.Value.Category.Price}");
                             }
                         }
-                        break; 
+                        break;
 
                 }
             }
