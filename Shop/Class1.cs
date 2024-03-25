@@ -11,7 +11,7 @@ namespace ConsoleApp1.Shop;
 
 public class Product
 {
-   public string Description { get; set; }
+    public string Description { get; set; }
     public int Price { get; set; }
     public Category Category { get; set; }
 }
@@ -32,69 +32,79 @@ class Class1
         {
             return true;
         }
-        return false;
+        else
+        {
+
+            return false;
+        }
     }
 
     public static void SaveProductsToFile()
     {
-        string json = JsonSerializer.Serialize(FileName.productList);
-        File.WriteAllText("products.txt", json);
+        try
+        {
+            var json = JsonSerializer.Serialize(FileName.productList);
+            File.WriteAllText("products.txt", json);
+            Console.WriteLine("Products saved successfully.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving products: {ex.Message}");
+        }
     }
 
     public static void ReadProductsFromFile()
     {
-        string filePath = "products.txt";
-        string directory = Path.GetDirectoryName(filePath);
-        if (!Directory.Exists(directory))
+        try
         {
-            Directory.CreateDirectory(directory);
+            string jsonString = File.ReadAllText("products.txt");
+            FileName.productList = JsonSerializer.Deserialize<List<Product>>(jsonString);
+            Console.WriteLine("Products loaded successfully.");
         }
-        string json = JsonSerializer.Serialize(FileName.productList);
-        File.WriteAllText(filePath, json);
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading products: {ex.Message}");
+        }
+    }
+
+
+
+
+    public static void AddProduct(Product product, Category category)
+    {
+        if (product != null && product.Price > 0)
+        {
+            FileName.productList.Add(product);
+            Console.WriteLine("Product added successfully.");
+        }
+        else
+        {
+            Console.WriteLine("Invalid product information. Product not added.");
+        }
     }
 
     public static void SavePersonProductsToFile()
     {
-        var serializedData = Enumerable.Select(FileName.listPerson, (KeyValuePair<string, Dictionary<string, Product>> entry) => new
-        {
-            PersonName = entry.Key,
-            Products = entry.Value
-        });
-        string json = JsonSerializer.Serialize(serializedData);
-        File.WriteAllText("person_products.txt", json);
+        var json = JsonSerializer.Serialize(FileName.listPerson);
+        File.WriteAllText("person.txt", json);
     }
 
     public static void ReadPersonProductsFromFile()
     {
-        string jsonString = File.ReadAllText("person_products.txt");
-        FileName.listPerson = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, Product>>>(jsonString);
+        string jsonString = File.ReadAllText("person.txt");
+        FileName.listPerson = JsonSerializer.Deserialize<Dictionary<string, Product>>(jsonString);
     }
 
-    public static void AddProduct(string productName, Product product)
+    public static void AddProductToPerson(string personName, Product product)
     {
-        if (FileName.productList.ContainsKey(productName))
-        {
-            FileName.productList[productName] = product;
-        }
-        else
-        {
-            FileName.productList.Add(productName, product);
-        }
-    }
 
-    public static void AddProductToPerson(string personName, string category, Product product)
-    {
         if (!FileName.listPerson.ContainsKey(personName))
         {
-            FileName.listPerson[personName] = new Dictionary<string, Product>();
+            FileName.listPerson = new Dictionary<string, Product>();
         }
-        if (FileName.listPerson[personName].ContainsKey(category))
-        {
-            Console.WriteLine(personName + " already has a product in category " + category + ".");
-            return;
-        }
-        FileName.listPerson[personName][category] = product;
-        Console.WriteLine($"Product added successfully for {personName} in category {category}.");
+
+        FileName.listPerson[personName] = product;
+        Console.WriteLine($"Product added successfully for {personName} ");
     }
 
 }

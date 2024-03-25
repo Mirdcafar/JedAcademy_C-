@@ -5,7 +5,7 @@ using ConsoleApp1.Shop;
 
 internal class FileName
 {
-    public static Dictionary<string, Dictionary<string, Product>> listPerson = new Dictionary<string, Dictionary<string, Product>>();
+    public static Dictionary<string, Product> listPerson = new Dictionary<string, Product>();
     public static List<Product> productList = new List<Product>();
 
     static void Main()
@@ -57,7 +57,7 @@ internal class FileName
                                 productDrink.Category = Category.Drink;
                                 productDrink.Description = drinkName;
                                 productDrink.Price = drinkPrice;
-                                Class1.AddProduct(productDrink , Category.Drink);
+                                Class1.AddProduct(productDrink, Category.Drink);
                                 break;
 
                             case 2:
@@ -70,7 +70,7 @@ internal class FileName
                                 productPizza.Category = Category.Pizza;
                                 productPizza.Description = pizzaName;
                                 productPizza.Price = pizzaPrice;
-                                Class1.AddProduct(productPizza , Category.Pizza);
+                                Class1.AddProduct(productPizza, Category.Pizza);
                                 break;
 
                             case 3:
@@ -83,7 +83,7 @@ internal class FileName
                                 productDesert.Category = Category.Dessert;
                                 productDesert.Description = desertName;
                                 productDesert.Price = desertPrice;
-                                Class1.AddProduct(productDesert , Category.Dessert);
+                                Class1.AddProduct(productDesert, Category.Dessert);
                                 break;
 
                             case 4:
@@ -96,7 +96,7 @@ internal class FileName
                                 productSalad.Category = Category.Salad;
                                 productSalad.Description = saladName;
                                 productSalad.Price = saladPrice;
-                                Class1.AddProduct(productSalad , Category.Salad);
+                                Class1.AddProduct(productSalad, Category.Salad);
                                 break;
 
                             default:
@@ -119,13 +119,11 @@ internal class FileName
                         break;
                     case 5:
                         Class1.ReadPersonProductsFromFile();
-                        foreach (var person in listPerson)
+                        foreach (var products in listPerson)
                         {
-                            Console.WriteLine($"Name: {person.Key}");
-                            foreach (var products in person.Value)
-                            {
-                                Console.WriteLine($"{products.Key}: {products.Value.Category} - {products.Value.Description}");
-                            }
+
+                            Console.WriteLine($"{products.Key}: {products.Value.Category} - {products.Value.Description}");
+
                         }
                         break;
                     case 6:
@@ -146,6 +144,7 @@ internal class FileName
                 Console.WriteLine("4.Liste olan mehsulara bahmag");
 
                 int nums = int.Parse(Console.ReadLine());
+                Class1.ReadProductsFromFile();
 
                 switch (nums)
                 {
@@ -169,7 +168,10 @@ internal class FileName
 
                                 foreach (var products in productList)
                                 {
-                                    Class1.AddProductToPerson(products.Category, "Drinks" products.Description, products.Price);
+                                    if (products.Category == Category.Drink)
+                                    {
+                                        Class1.AddProductToPerson(personName, products);
+                                    }
                                 }
                                 break;
                             case 2:
@@ -177,7 +179,10 @@ internal class FileName
 
                                 foreach (var products in productList)
                                 {
-                                    Class1.AddProductToPerson(products.Category, "Pizza", products.Description, products.Price);
+                                    if (products.Category == Category.Pizza)
+                                    {
+                                        Class1.AddProductToPerson(personName, products);
+                                    }
                                 }
                                 break;
                             case 3:
@@ -185,7 +190,10 @@ internal class FileName
 
                                 foreach (var products in productList)
                                 {
-                                    Class1.AddProductToPerson(products.Category, "Desserts", products.Description, products.Price);
+                                    if (products.Category == Category.Dessert)
+                                    {
+                                        Class1.AddProductToPerson(personName,  products);
+                                    }
                                 }
                                 break;
                             case 4:
@@ -193,7 +201,10 @@ internal class FileName
 
                                 foreach (var products in productList)
                                 {
-                                    Class1.AddProductToPerson(products.Category, "Salad", products.Description, products.Price);
+                                    if (products.Category == Category.Salad)
+                                    {
+                                        Class1.AddProductToPerson(personName,  products);
+                                    }
                                 }
                                 break;
 
@@ -207,30 +218,11 @@ internal class FileName
                         break;
                     case 4:
 
-
-                        foreach (var person in FileName.listPerson)
+                        foreach (var products in listPerson)
                         {
-                            Console.WriteLine($"Adı:{person.Key}");
-                            foreach (var products in person.Value)
-                            {
-                                if (products.Value.Drink != null)
-                                {
-                                    Console.WriteLine($"{products.Key}: {products.Value.Drink}");
-                                }
-                                if (products.Value.Pizza != null)
-                                {
-                                    Console.WriteLine($"{products.Key}: {products.Value.Pizza}");
-                                }
-                                if (products.Value.Dessert != null)
-                                {
-                                    Console.WriteLine($"{products.Key}: {products.Value.Dessert}");
-                                }
-                                if (products.Value.Salad != null)
-                                {
-                                    Console.WriteLine($"{products.Key}: {products.Value.Salad}");
-                                }
-                                Console.WriteLine($"Ümumi Qiymət:{products.Value.Category.Price}");
-                            }
+                            
+                                Console.WriteLine($"{products.Key}: {products.Value.Category} - {products.Value.Description}");
+                            
                         }
                         break;
 
