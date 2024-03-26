@@ -1,1 +1,1 @@
-{"Drink":{"Drink":"fanta","Pizza":null,"Dessert":null,"Salad":null,"Category":{"Name":"Drink","Price":2}},"Pizza":{"Drink":null,"Pizza":"Peperoni","Dessert":null,"Salad":null,"Category":{"Name":"Pizza","Price":34}}}
+[{"Count":1,"Description":"sandora","Price":1,"Category":0},{"Count":1,"Description":"peperoni","Price":12,"Category":1}]
