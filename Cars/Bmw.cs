@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace ConsoleApp1.Cars
-{
-    public class Bmw : Car
-    {
-        public bool HasXDrive { get; set; } 
-    }
-}
+//namespace ConsoleApp1.Cars
+//{
+//    public class Bmw : Car
+//    {
+//        public bool HasXDrive { get; set; } 
+//    }
+//}
