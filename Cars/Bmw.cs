@@ -8,6 +8,6 @@
 //{
 //    public class Bmw : Car
 //    {
-//        public bool HasXDrive { get; set; } 
+//        public bool HasXDrive { get; set; }
 //    }
 //}
