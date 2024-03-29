@@ -18,7 +18,7 @@ namespace ConsoleApp1.Animals
             cat.Lives = 9;
             cat.Say();
             Dog dog = new Dog();
-            dog.Name = "Wuwu";
+            dog.Name = "ShuShu";
             dog.Age = 3;
             dog.Jump = 2;
             dog.Say();
@@ -26,9 +26,11 @@ namespace ConsoleApp1.Animals
             animal.Add(cat);
             animal.Add(dog);
 
+
             foreach (var item in animal)
             {
-                Console.WriteLine($"Name:{item.Name} , Age:{item.Age} , Say:{item.Say()}");
+                Console.WriteLine($"Name: {item.Name} , Age: {item.Age} , Say: {item.Say()}");
+
             }
         }
     }

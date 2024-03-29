@@ -154,6 +154,8 @@
 //                Console.WriteLine("2.Register");
 //                Console.WriteLine("3.LogIn");
 //                Console.WriteLine("4.Liste olan mehsulara bahmag");
+//                Console.WriteLine("5.Liste olan mehsulu silmek");
+//                Console.WriteLine("6.Cixis");
 
 //                int nums = int.Parse(Console.ReadLine());
 //                Class1.ReadProductsFromFile();
@@ -233,7 +235,13 @@
 //                        Class1.ReadPersonProductsFromFile();
 //                        break;
 //                    case 4:
+
 //                        var totalPrice = productList.Select(x => x.Count * x.Price).Sum();
+
+//                        decimal discountPercentage = 20;
+//                        decimal discountAmount = totalPrice * (discountPercentage / 100);
+//                        decimal totalAmount = totalPrice - discountAmount;
+
 
 //                        foreach (var personEntry in listPerson)
 //                        {
@@ -244,8 +252,17 @@
 //                            {
 //                                Console.WriteLine($"{products.Category} - {products.Description} - Count:{product.Count} - Price: {products.Price}");
 //                            }
-//                            Console.WriteLine($"Total Price: {totalPrice}");
+//                            Console.WriteLine($"Total Price: {totalAmount}");
 //                        }
+//                        break;
+//                    case 5:
+//                        Console.WriteLine("Silmey istediyiniz mehsulun categoriyasini yazin:");
+//                        string categori = Console.ReadLine();
+
+//                        Class1.FindRemove(categori);
+//                        break;
+//                    case 6:
+//                        exit = false;
 //                        break;
 //                    default:
 //                        Console.WriteLine("Menuda olan regemleri dahil edin !!!");

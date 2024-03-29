@@ -97,5 +97,21 @@
 
 //    }
 
+//    public static void FindRemove(string name)
+//    {
+//        var find = FileName.listPerson.FirstOrDefault(x => x.Value.Category.ToString() == name);
+
+//        if (find.Key != null)
+//        {
+//            FileName.listPerson.Remove(find.Key);
+//            Console.WriteLine("Məhsul uğurla silindi.");
+//        }
+//        else
+//        {
+//            Console.WriteLine("Belirtilen kategoriye uyğun məhsul tapılmadı.");
+//        }
+//    }
+
+
 //}
 
