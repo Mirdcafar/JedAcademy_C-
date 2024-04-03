@@ -21,9 +21,9 @@ namespace ConsoleApp1.GitHub
 
             var userObject = JsonSerializer.Deserialize<User>(responseBody);
 
-            Console.WriteLine($"ID: {userObject.name}");
-            Console.WriteLine($"Type: {userObject.company}");
-            Console.WriteLine($"SetAdmin: {userObject.email}");
+            Console.WriteLine($"ID: {userObject.login}");
+            Console.WriteLine($"Type: {userObject.id}");
+            Console.WriteLine($"SetAdmin: {userObject.siteAdmin}");
 
             exit = false;
 
