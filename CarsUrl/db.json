@@ -1,0 +1,12 @@
+{
+  "cars": [
+    {
+      "model": "bmw",
+      "year": 2005
+    },
+    {
+      "model": "Mercedes",
+      "year": 2019
+    }
+  ]
+}
