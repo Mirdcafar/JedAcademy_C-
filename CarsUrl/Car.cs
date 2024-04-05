@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.CarsUrl
 {
-    public class Cars
+    public class Car
     {
         public string model { get ; set ;}
         public int year { get; set; }

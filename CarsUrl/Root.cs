@@ -9,6 +9,6 @@ namespace ConsoleApp1.CarsUrl
 {
     public class Root
     {
-        public List<Cars> cars { get; set; }
+        public List<Car> cars { get; set; }
     }
 }
