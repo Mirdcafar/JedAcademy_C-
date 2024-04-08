@@ -12,23 +12,22 @@ namespace ConsoleApp1.UserPosts
     {
         public static async Task Main()
         {
-            var json = await File.ReadAllTextAsync("C:\\Users\\User\\source\\repos\\ConsoleApp1\\ConsoleApp1\\UserPosts\\user.json");
-            var res = JsonSerializer.Deserialize<List<User>>(json);
+            Task<List<User>> userTask = Task.Run(() => ReadUserAsync("C:\\Users\\User\\source\\repos\\ConsoleApp1\\ConsoleApp1\\UserPosts\\user.json"));
+            Task<List<Post>> postTask = Task.Run(() => ReadPostAsync("C:\\Users\\User\\source\\repos\\ConsoleApp1\\ConsoleApp1\\UserPosts\\post.json"));
 
-            var post = await File.ReadAllTextAsync("C:\\Users\\User\\source\\repos\\ConsoleApp1\\ConsoleApp1\\UserPosts\\post.json");
-            var rest = JsonSerializer.Deserialize<List<Post>>(post);
-
+            List<User> user = await userTask;
+            List<Post> post = await postTask;
 
             while (true)
             {
-                for (int i = 1; i < res.Count; i++)
+                for (int i = 1; i < user.Count; i++)
                 {
-                    Console.WriteLine($"{i}.Name:{res[i].name}, Email:{res[i].email}");
+                    Console.WriteLine($"{i}.Name:{user[i].name}, Email:{user[i].email}");
                 }
-                int num = int.Parse(Console.ReadLine());
-                foreach (var item in rest)
+                int id = int.Parse(Console.ReadLine());
+                foreach (var item in post)
                 {
-                    if (item.userId == num)
+                    if (item.userId == id)
                     {
                         Console.WriteLine($"UserId:{item.userId}, Id:{item.id}, Title:{item.title}, Body:{item.body} ");
                         Console.WriteLine();
@@ -38,6 +37,17 @@ namespace ConsoleApp1.UserPosts
                 Console.ReadKey();
                 Console.Clear();
             }
+        }
+        public static async Task<List<User>> ReadUserAsync(string filePath)
+        {
+            string json = await File.ReadAllTextAsync(filePath);
+            return JsonSerializer.Deserialize<List<User>>(json);
+        }
+
+        public static async Task<List<Post>> ReadPostAsync(string filePath)
+        {
+            string post = await File.ReadAllTextAsync(filePath);
+            return JsonSerializer.Deserialize<List<Post>>(post);
         }
     }
 }
