@@ -8,16 +8,19 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.UserPosts
 {
-    public class FileName
+    public class UserPost
     {
-        public static async Task Main()
+        public static void Main()
         {
-            Task<List<User>> userTask = Task.Run(() => ReadUserAsync("C:\\Users\\User\\source\\repos\\ConsoleApp1\\ConsoleApp1\\UserPosts\\user.json"));
-            Task<List<Post>> postTask = Task.Run(() => ReadPostAsync("C:\\Users\\User\\source\\repos\\ConsoleApp1\\ConsoleApp1\\UserPosts\\post.json"));
+           
 
-            List<User> user = await userTask;
-            List<Post> post = await postTask;
+           
 
+            string json = File.ReadAllText("C:\\Users\\User\\source\\repos\\ConsoleApp1\\ConsoleApp1\\UserPosts\\user.json");
+            var user = JsonSerializer.Deserialize<List<User>>(json);
+
+            string post = File.ReadAllText("C:\\Users\\User\\source\\repos\\ConsoleApp1\\ConsoleApp1\\UserPosts\\post.json");
+            var posts = JsonSerializer.Deserialize<List<Post>>(post);
             while (true)
             {
                 for (int i = 1; i < user.Count; i++)
@@ -26,7 +29,7 @@ namespace ConsoleApp1.UserPosts
                 }
                 Console.Write("Regemi dahil edin:");
                 int id = int.Parse(Console.ReadLine());
-                foreach (var item in post)
+                foreach (var item in posts)
                 {
                     if (item.userId == id)
                     {
@@ -40,17 +43,7 @@ namespace ConsoleApp1.UserPosts
                 Console.Clear();
             }
         }
-        public static async Task<List<User>> ReadUserAsync(string filePath)
-        {
-            string json = await File.ReadAllTextAsync(filePath);
-            return JsonSerializer.Deserialize<List<User>>(json);
-        }
-
-        public static async Task<List<Post>> ReadPostAsync(string filePath)
-        {
-            string post = await File.ReadAllTextAsync(filePath);
-            return JsonSerializer.Deserialize<List<Post>>(post);
-        }
+        
     }
 }
 
