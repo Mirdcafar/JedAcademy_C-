@@ -24,12 +24,14 @@ namespace ConsoleApp1.UserPosts
                 {
                     Console.WriteLine($"{i}.Name:{user[i].name}, Email:{user[i].email}");
                 }
+                Console.Write("Regemi dahil edin:");
                 int id = int.Parse(Console.ReadLine());
                 foreach (var item in post)
                 {
                     if (item.userId == id)
                     {
                         Console.WriteLine($"UserId:{item.userId}, Id:{item.id}, Title:{item.title}, Body:{item.body} ");
+                        Thread.Sleep(1000);
                         Console.WriteLine();
                     }
                 }
