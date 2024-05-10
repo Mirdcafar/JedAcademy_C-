@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace ConsoleApp1.UserPosts
-{
-    public class Post
-    {
-        public int userId { get; set; }
-        public int id { get; set; }
-        public string title { get; set; }
-        public string body { get; set; }
-    }
-}
+//namespace ConsoleApp1.UserPosts
+//{
+//    public class Post
+//    {
+//        public int userId { get; set; }
+//        public int id { get; set; }
+//        public string title { get; set; }
+//        public string body { get; set; }
+//    }
+//}
