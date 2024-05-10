@@ -80,9 +80,14 @@ namespace ConsoleApp1.SQLProjekt
                             Console.WriteLine("mehsulun hsusiyeterini dahil edin dahiledin:");
                             string description = Console.ReadLine();
 
-                            var query = @$"INSERT INTO Product (Name, Price, Count, Description) VALUES ('{name}',{price}, {count}, '{description}')";
+                            var query = @$"INSERT INTO Product (Name, Price, Count, Description) VALUES (@Name,@Price, @Count, @Description)";
 
                             var command = new SqlCommand(query, connection);
+
+                            command.Parameters.AddWithValue("@Name", name);
+                            command.Parameters.AddWithValue("@Price", price);
+                            command.Parameters.AddWithValue("@Count", count);
+                            command.Parameters.AddWithValue("Description", description);
                             var result = command.ExecuteNonQuery();
 
                             Console.WriteLine($"Rows affected: {result}");
@@ -95,9 +100,11 @@ namespace ConsoleApp1.SQLProjekt
                             Console.WriteLine("Mehsulun id sini dahil edin:");
                             int id = int.Parse(Console.ReadLine());
 
-                            var querys = @$"UPDATE Product SET {names} = '{product}' WHERE Id = {id}";
+                            var querys = @$"UPDATE Product SET {names} = @Product WHERE Id = @Id";
 
                             var commands = new SqlCommand(querys, connection);
+                            commands.Parameters.AddWithValue("@Product", product);
+                            commands.Parameters.AddWithValue("@Id", id);
                             var results = commands.ExecuteNonQuery();
 
                             Console.WriteLine($"Rows affected: {results}");
@@ -105,9 +112,13 @@ namespace ConsoleApp1.SQLProjekt
                         case 3:
                             Console.WriteLine("Mehsulun idi sini dahil edin:");
                             int idi = int.Parse(Console.ReadLine());
-                            var queryi = @$"DELETE FROM Product WHERE Id = {idi}";
+                            var queryi = @$"DELETE FROM Product WHERE Id = @Id";
+
 
                             var commande = new SqlCommand(queryi, connection);
+
+                            commande.Parameters.AddWithValue("@Id", idi);
+
                             var resultse = commande.ExecuteNonQuery();
 
                             Console.WriteLine($"Rows affected: {resultse}");
