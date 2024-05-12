@@ -9,8 +9,15 @@ namespace ConsoleApp1.SQLProjekt
         public static void Main()
         {
             List<Product> products = new List<Product>();
+            List<Employees> employees = new List<Employees>();
 
             Methods.ViewProduct(products);
+
+
+            foreach (var product1 in products)
+            {
+                Console.WriteLine($"ID: {product1.Id}, Name: {product1.Name}, Price: {product1.Price}, Count: {product1.Count}, Description: {product1.Description}");
+            }
 
             bool exit = true;
 
@@ -21,7 +28,9 @@ namespace ConsoleApp1.SQLProjekt
                 Console.WriteLine("1.Mexsul eleve etmey");
                 Console.WriteLine("2.Mexsulun icinde neyise deyistirmey");
                 Console.WriteLine("3.Mexsul silmey");
-                Console.WriteLine("4.Cixis");
+                Console.WriteLine("4.Iscilerin siyahi");
+                Console.WriteLine("5.Iscilerin satdigi mehsullarin sayi");
+                Console.WriteLine("6.Cixis");
                 
                     int num = int.Parse(Console.ReadLine());
                     switch (num)
@@ -58,6 +67,15 @@ namespace ConsoleApp1.SQLProjekt
 
                             break;
                         case 4:
+                        Methods.ViewEmployees(employees);
+
+
+                        foreach (var employe in employees)
+                        {
+                            Console.WriteLine($"Id: {employe.Id}, FullName: {employe.FullName}, NumberOfUnitsSold: {employe.NumberOfUnitsSold}");
+                        }
+                        break;
+                        case 6:
                             exit = false;
                             break;
                         default:

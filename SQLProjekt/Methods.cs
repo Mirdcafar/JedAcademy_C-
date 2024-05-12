@@ -41,12 +41,6 @@ namespace ConsoleApp1.SQLProjekt
 
                     }
                 }
-
-                foreach (var product1 in products)
-                {
-                    Console.WriteLine($"ID: {product1.Id}, Name: {product1.Name}, Price: {product1.Price}, Count: {product1.Count}, Description: {product1.Description}");
-                }
-
             }
         }
 
@@ -124,6 +118,38 @@ namespace ConsoleApp1.SQLProjekt
                 var result = commande.ExecuteNonQuery();
 
             }
+        }
+
+        public static void ViewEmployees(List<Employees> employees)
+        {
+            var connectionString = @"Data Source=DESKTOP-1EL7RH1\MSSQLSERVER01;Initial Catalog=Sport_Shop;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+
+            using(var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                var query = @"SELECT * FROM Employees";
+                var command = new SqlCommand(query, connection);
+
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        var employe = new Employees();
+                        var id = reader.GetInt32(0);
+                        var FullName = reader.GetString(1);
+                        var NumberOfUnitsSold = reader.GetInt32(2);
+
+                        employe.Id = id;
+                        employe.FullName = FullName;
+                        employe.NumberOfUnitsSold = NumberOfUnitsSold;
+
+                        employees.Add(employe);
+                    }
+                }
+            }
+
         }
     }
 }
