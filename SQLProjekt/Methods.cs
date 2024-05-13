@@ -10,11 +10,16 @@ namespace ConsoleApp1.SQLProjekt
 {
     public class Methods
     {
-        public static void ViewProduct(List<Product> products)
-        {
-            var connectionString = @"Data Source=DESKTOP-1EL7RH1\MSSQLSERVER01;Initial Catalog=Sport_Shop;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        private string _connectionString;
 
-            using (var connection = new SqlConnection(connectionString))
+        public Methods(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+        public void ViewProduct(List<Product> products)
+        {
+
+            using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 var query = @"SELECT * FROM Product";
@@ -41,14 +46,14 @@ namespace ConsoleApp1.SQLProjekt
 
                     }
                 }
+
             }
         }
 
-        public static void ViewCount()
+        public void ViewCount()
         {
-            var connectionString = @"Data Source=DESKTOP-1EL7RH1\MSSQLSERVER01;Initial Catalog=Sport_Shop;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
@@ -60,11 +65,10 @@ namespace ConsoleApp1.SQLProjekt
 
             }
         }
-        public static void InsertData(string name , int price , int count , string description)
+        public void InsertData(string name , int price , int count , string description)
         {
-            var connectionString = @"Data Source=DESKTOP-1EL7RH1\MSSQLSERVER01;Initial Catalog=Sport_Shop;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
@@ -82,11 +86,10 @@ namespace ConsoleApp1.SQLProjekt
             }
         }
 
-        public static void UpdateData(string names, string product , int id)
+        public void UpdateData(string names, string product , int id)
         {
-            var connectionString = @"Data Source=DESKTOP-1EL7RH1\MSSQLSERVER01;Initial Catalog=Sport_Shop;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
@@ -102,11 +105,10 @@ namespace ConsoleApp1.SQLProjekt
             }
         }
 
-        public static void DeleteData( int idi)
+        public void DeleteData( int idi)
         {
-            var connectionString = @"Data Source=DESKTOP-1EL7RH1\MSSQLSERVER01;Initial Catalog=Sport_Shop;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
@@ -120,11 +122,10 @@ namespace ConsoleApp1.SQLProjekt
             }
         }
 
-        public static void ViewEmployees(List<Employees> employees)
+        public void ViewEmployees(List<Employees> employees)
         {
-            var connectionString = @"Data Source=DESKTOP-1EL7RH1\MSSQLSERVER01;Initial Catalog=Sport_Shop;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
-            using(var connection = new SqlConnection(connectionString))
+            using(var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 

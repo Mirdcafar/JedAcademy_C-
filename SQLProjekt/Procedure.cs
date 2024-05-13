@@ -10,8 +10,10 @@ namespace ConsoleApp1.SQLProjekt
         {
             List<Product> products = new List<Product>();
             List<Employees> employees = new List<Employees>();
+            var connectionString = @"Data Source=DESKTOP-1EL7RH1\MSSQLSERVER01;Initial Catalog=Sport_Shop;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
-            Methods.ViewProduct(products);
+            var methods = new Methods(connectionString);
+            methods.ViewProduct(products);
 
 
             foreach (var product1 in products)
@@ -23,7 +25,7 @@ namespace ConsoleApp1.SQLProjekt
 
             while (exit)
             {
-                Methods.ViewCount();
+                methods.ViewCount();
 
                 Console.WriteLine("1.Mexsul eleve etmey");
                 Console.WriteLine("2.Mexsulun icinde neyise deyistirmey");
@@ -45,7 +47,7 @@ namespace ConsoleApp1.SQLProjekt
                             Console.WriteLine("mehsulun hsusiyeterini dahil edin dahiledin:");
                             string description = Console.ReadLine();
 
-                            Methods.InsertData(name, price, count, description);
+                            methods.InsertData(name, price, count, description);
 
                             break;
                         case 2:
@@ -56,18 +58,18 @@ namespace ConsoleApp1.SQLProjekt
                             Console.WriteLine("Mehsulun id sini dahil edin:");
                             int id = int.Parse(Console.ReadLine());
 
-                            Methods.UpdateData(names, product, id);
+                            methods.UpdateData(names, product, id);
 
                             break;
                         case 3:
                             Console.WriteLine("Mehsulun idi sini dahil edin:");
                             int idi = int.Parse(Console.ReadLine());
-                            
-                            Methods.DeleteData(idi);
+
+                        methods.DeleteData(idi);
 
                             break;
                         case 4:
-                        Methods.ViewEmployees(employees);
+                        methods.ViewEmployees(employees);
 
 
                         foreach (var employe in employees)
